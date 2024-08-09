@@ -40,6 +40,32 @@ const Navbar = ({
 			value: "py",
 		},
 	];
+
+	const customStyles = {
+		option: (provided, state) => ({
+			...provided,
+			color: state.isSelected ? 'white' : 'gray', 
+			backgroundColor: state.isSelected ? '#5cb85c' : 'white',  
+			':hover': {
+				backgroundColor: '#f0f0f0', 
+			},
+		}),
+		control: (provided) => ({
+			...provided,
+			backgroundColor: 'white',
+			borderColor: 'gray',  
+			boxShadow: 'none',
+			':hover': {
+				borderColor: 'gray',  
+			},
+		}),
+		singleValue: (provided) => ({
+			...provided,
+			color: 'gray', 
+		}),
+	};
+	
+
 	return (
 		<div className="ml-2 mt-2 w-full flex h-8 md:h-12 justify-between mb-2">
 			<button
@@ -72,6 +98,7 @@ const Navbar = ({
 								: jsBoiler;
 						setCode(boiler);
 					}}
+					styles={customStyles}
 				/>
 				<Select
 					placeholder={theme}
@@ -83,6 +110,7 @@ const Navbar = ({
 					value={theme.value}
 					className="w-1/2	"
 					onChange={handleThemeChange}
+					styles={customStyles}
 				/>
 			</div>
 		</div>

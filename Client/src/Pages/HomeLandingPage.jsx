@@ -4,6 +4,9 @@ import useLoggedInUser from '../Hooks/useLoggedInUser';
 
 import Navbar_LoggedIn from "../Components/Navbar/Navbar_LoggedIn";
 import Navbar_NotLoggedIn from "../Components/Navbar/Navbar_NotLoggedIn";
+import Footer from "../Components/Footer";
+import TypeWriterFont from "../Components/TypeWriterFont";
+import DebugFeature from "../Components/DebugFeature";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 
@@ -29,8 +32,8 @@ const HomeLandingPage = () => {
             )}
             
             <div className="w-full poppins-bold text-white px-16 flex flex-col items-center gap-5">
-                <h1 className="text-[96px] mt-10">
-                    &lt; Build your stuff &gt;
+                <h1 className="text-[90px] mt-10">
+                Unleash the Coder Within!
                 </h1>
                 
                 <div className="flex flex-row gap-5">
@@ -42,6 +45,9 @@ const HomeLandingPage = () => {
                     <CodeEditor />
                 </div>
             </div>
+            <TypeWriterFont />
+            <DebugFeature />
+            <Footer />
         </div>
     );
 };

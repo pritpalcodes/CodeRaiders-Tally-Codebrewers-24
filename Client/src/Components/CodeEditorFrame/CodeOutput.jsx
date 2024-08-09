@@ -3,7 +3,7 @@
 const CodeOutput = ({ output, toggled, status }) => {
 	return (
 		<div
-			className={`flex flex-col overflow-hidden bg-gray-100 p-4 h-64 w-1/2 md:w-full ${
+			className={`flex flex-col overflow-hidden bg-black-800 p-4 h-64 w-1/2 md:w-full ${
 				toggled ? "md:h-full" : "md:h-4/6"
 			}`}>
 			<label className="flex text-xl border-b-2 border-gray-200 pb-4 font-semibold text-gray-600">

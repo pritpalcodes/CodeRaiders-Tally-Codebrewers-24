@@ -14,7 +14,7 @@ const CodeInput = ({ testInput, setTestInput, setToggled }) => {
 				toggleInputBar ? "md:h-16" : "md:h-1/3"
 			}`}>
 			<button
-				className="flex ml-0 items-center bg-gray-200 pt-2 pr-2 rounded-md text-base justify-center w-16"
+				className="flex ml-0 items-center bg-gray-600 pt-2 pr-2 rounded-md text-base justify-center w-16"
 				onClick={() => {
 					setToggled(!toggleInputBar);
 					setToggleInputBar(!toggleInputBar);
@@ -29,7 +29,7 @@ const CodeInput = ({ testInput, setTestInput, setToggled }) => {
 			<textarea
 				name=""
 				id=""
-				className={`p-2 outline-none border-none bg-white ${
+				className={`p-2 outline-none border-none bg-gray-500 ${
 					toggleInputBar ? "hidden" : ""
 				}`}
 				cols="30"

@@ -1,0 +1,42 @@
+.practice-container {
+    padding: 20px;
+    color: #333;
+  }
+  
+  .problems-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .problems-table th,
+  .problems-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .problems-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+  }
+  
+  .problems-table tr.even {
+    background-color: #f9f9f9;
+  }
+  
+  .problems-table tr.odd {
+    background-color: #fff;
+  }
+  
+  .problems-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

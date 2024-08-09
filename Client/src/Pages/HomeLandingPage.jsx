@@ -9,6 +9,7 @@ import TypeWriterFont from "../Components/TypeWriterFont";
 import DebugFeature from "../Components/DebugFeature";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
+import { useNavigate } from "react-router-dom";
 
 const HomeLandingPage = () => {
     const [user] = useAuthState(auth);
@@ -21,6 +22,16 @@ const HomeLandingPage = () => {
         auth.signOut().catch((error) => {
             console.error("Sign out error", error);
         });
+    };
+
+    const navigate= useNavigate();
+
+    const competeClick= ()=>{
+        navigate('/contest');
+    };
+
+    const practiceClick= ()=>{
+        navigate('/practice');
     };
 
     return (
@@ -37,8 +48,8 @@ const HomeLandingPage = () => {
                 </h1>
                 
                 <div className="flex flex-row gap-5">
-                    <button className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Practice</button>
-                    <button className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Compete</button>
+                    <button onClick={practiceClick} className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Practice</button>
+                    <button onClick={competeClick} className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Compete</button>
                 </div>
                 
                 <div className="w-[80%] h-[1000px] bg-red-300 mt-10">

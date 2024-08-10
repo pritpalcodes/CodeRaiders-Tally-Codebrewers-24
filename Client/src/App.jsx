@@ -35,13 +35,10 @@ function App() {
             {/* <Route path='/signup' element={<Signup/>} /> */}
             {/* <Route path='/page-loading' element={<PageLoading/>} /> */}
             <Route path='/contest/:code/leaderboard' element={<LeaderBoard />} />
-          </Routes>
-          
-        </BrowserRouter>
             <Route path='/contest/:code' element={<ContestDetails/>} />
-
-          </Routes>          
-      </BrowserRouter>
+          
+          </Routes>
+        </BrowserRouter>
   )
 }
 

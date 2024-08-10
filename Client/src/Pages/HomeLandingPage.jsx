@@ -10,6 +10,7 @@ import DebugFeature from "../Components/DebugFeature";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 import abstract from '../assets/abstract.png'
+import { useNavigate } from "react-router-dom";
 
 const HomeLandingPage = () => {
     const [user] = useAuthState(auth);
@@ -21,6 +22,16 @@ const HomeLandingPage = () => {
         auth.signOut().catch((error) => {
             console.error("Sign out error", error);
         });
+    };
+
+    const navigate= useNavigate();
+
+    const competeClick= ()=>{
+        navigate('/contest');
+    };
+
+    const practiceClick= ()=>{
+        navigate('/practice');
     };
 
     return (
@@ -37,15 +48,9 @@ const HomeLandingPage = () => {
                     Unleash the Coder Within!
                 </h1>
                 
-                <div className="poppins-light text-3xl pb-5">
-                    <TypeWriterFont />
-                </div>
-                
-                <div className="flex flex-row gap-5 text-2xl">
-                    <Link to="/practice">
-                        <button className="px-10 py-3 text-white border border-white rounded-3xl poppins-light hover:bg-white hover:text-black ">Practice</button>
-                    </Link>
-                    <button className="px-10 py-3 text-white border border-white rounded-3xl poppins-light hover:bg-white hover:text-black">Compete</button>
+                <div className="flex flex-row gap-5">
+                    <button onClick={practiceClick} className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Practice</button>
+                    <button onClick={competeClick} className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Compete</button>
                 </div>
                 
                 <div className="w-[90%] p-5 rounded-3xl border border-white/30 bg-[#1e1e1e] mt-10">

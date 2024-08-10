@@ -1,0 +1,114 @@
+/* Base Styling */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Container for the Contest Component */
+  .contest-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px;
+  }
+
+  .ongoing-contest {
+    background-color: #efa640; /* Highlight color */
+    font-weight: bold;
+  }
+  
+  /* Table Styling */
+  .contest-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .contest-table th, .contest-table td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .contest-table th {
+    background-color: #6c63ff;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .contest-table td {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+  }
+  
+  .contest-table tr:hover {
+    background-color: #ececff;
+    cursor: pointer;
+  }
+  
+  .contest-table tr:hover td {
+    color: #6c63ff;
+  }
+  
+  /* Heading Styles */
+  h2 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Contest Details Section */
+  .contest-details {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-left: 5px solid #6c63ff;
+    border-radius: 5px;
+  }
+  
+  .contest-details h3 {
+    margin-top: 0;
+    color: #6c63ff;
+  }
+  
+  .contest-details p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contest-container {
+      padding: 15px;
+    }
+  
+    .contest-table th, .contest-table td {
+      padding: 10px;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    .contest-details p {
+      font-size: 0.9em;
+    }
+  }
+  
+  
+  

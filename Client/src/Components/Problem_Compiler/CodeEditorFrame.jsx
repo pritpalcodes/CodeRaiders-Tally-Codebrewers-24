@@ -29,7 +29,7 @@ function CodeEditorFrame({ problem }) {
 		try {
 			const { data } = await axios.post(url, payload);
 			setOutput(data.output);
-			// console.log(data.output);
+			console.log(data.output);
 			setStatus("Finished");
 		} catch ({ response }) {
 			if (response) {

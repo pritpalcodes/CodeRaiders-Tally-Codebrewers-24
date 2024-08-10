@@ -7,21 +7,56 @@ const Contest = () => {
   const [ongoingContests, setOngoingContests] = useState([]);
   const [pastContests, setPastContests] = useState([]);
   const [selectedContest, setSelectedContest] = useState(null);
+  const [past, setPast] = useState([
+    { code: 'START146', name: 'Starters 146', date: '2024-07-15', time: '09:00', duration: '2 Hrs', startDate: '2024-07-15', endDate: '2024-07-15', instructions: `Rules and Regulations:
+        This is an IOI-style contest. This means that the problems will be partially graded. You will get the score for passing certain test data.
+        The details of the failed test cases will also be visible on your solution page.
+        You can submit solutions as many times as you'd like, there are no penalties for incorrect submissions. Only your best correct submission will be considered.
+        Those who achieve the score first will be placed higher in the ranklist in case of a tie.
+        We have removed all the Institutions that we could not identify from our database. We request you to update your institutions once again by going to your profile page.
+        You can also send in your queries in an email to help@codechef.com, during the contest.
+        Please do not discuss strategy, suggestions, or tips in the comments during a live contest. Posting questions clarifying the problem statement is ok. If you are unsure, email us at feedback@codechef.com.
+        Discussing CodeChef's problems or any aspect of a problem, on any other platform on the web, on identification, could lead to the disabling of the respective account and banning from the community.
+        Note: You can now "Code, Compile, and Run" your codes on our Online IDE.
+        However, if you are using any other online development environment, make sure that other contestants don't have access to your code. As a contestant, you are responsible for making sure others don't access the code that you submit. If you use Ideone, make sure to mark your submission "private" (not secret)".
+      ` },
+    { code: 'MEDIUM3', name: 'Medium 3', date: '2024-07-16', time: '10:00', duration: '2 Hrs', startDate: '2024-07-16', endDate: '2024-07-16', instructions: `Rules and Regulations:
+        This is an IOI-style contest. This means that the problems will be partially graded. You will get the score for passing certain test data.
+        The details of the failed test cases will also be visible on your solution page.
+        You can submit solutions as many times as you'd like, there are no penalties for incorrect submissions. Only your best correct submission will be considered.
+        Those who achieve the score first will be placed higher in the ranklist in case of a tie.
+        We have removed all the Institutions that we could not identify from our database. We request you to update your institutions once again by going to your profile page.
+        You can also send in your queries in an email to help@codechef.com, during the contest.
+        Please do not discuss strategy, suggestions, or tips in the comments during a live contest. Posting questions clarifying the problem statement is ok. If you are unsure, email us at feedback@codechef.com.
+        Discussing CodeChef's problems or any aspect of a problem, on any other platform on the web, on identification, could lead to the disabling of the respective account and banning from the community.
+        Note: You can now "Code, Compile, and Run" your codes on our Online IDE.
+        However, if you are using any other online development environment, make sure that other contestants don't have access to your code. As a contestant, you are responsible for making sure others don't access the code that you submit. If you use Ideone, make sure to mark your submission "private" (not secret)".
+      ` }
+  ]);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const ongoing = [
-      { code: 'UPCOMING1', name: 'Upcoming 1', date: '2024-08-10', time: '03:10', duration: '2 Hrs' },
-      { code: 'START147', name: 'Starters 147', date: '2024-08-14', time: '20:00', duration: '2 Hrs' },
-      { code: 'START148', name: 'Starters 148', date: '2024-08-15', time: '18:00', duration: '2 Hrs' },
-      { code: 'MEDIUM1', name: 'Medium 1', date: '2024-08-16', time: '19:00', duration: '2 Hrs' }
+      { code: 'UPCOMING1', name: 'Upcoming 1', date: '2024-08-18', time: '23:35', duration: '2 Hrs', startDate: '2024-08-18', endDate: '2024-08-18', instructions: `Rules and Regulations:
+          This is an IOI-style contest. This means that the problems will be partially graded. You will get the score for passing certain test data.
+          The details of the failed test cases will also be visible on your solution page.
+          You can submit solutions as many times as you'd like, there are no penalties for incorrect submissions. Only your best correct submission will be considered.
+          Those who achieve the score first will be placed higher in the ranklist in case of a tie.
+          We have removed all the Institutions that we could not identify from our database. We request you to update your institutions once again by going to your profile page.
+          You can also send in your queries in an email to help@codechef.com, during the contest.
+          Please do not discuss strategy, suggestions, or tips in the comments during a live contest. Posting questions clarifying the problem statement is ok. If you are unsure, email us at feedback@codechef.com.
+          Discussing CodeChef's problems or any aspect of a problem, on any other platform on the web, on identification, could lead to the disabling of the respective account and banning from the community.
+          Note: You can now "Code, Compile, and Run" your codes on our Online IDE.
+          However, if you are using any other online development environment, make sure that other contestants don't have access to your code. As a contestant, you are responsible for making sure others don't access the code that you submit. If you use Ideone, make sure to mark your submission "private" (not secret)".
+        ` },
+      { code: 'START147', name: 'Starters 147', date: '2024-08-14', time: '20:00', duration: '2 Hrs', startDate: '2024-08-14', endDate: '2024-08-14', instructions: 'Rules and Regulations: This is an IOI-style contest...' },
+      { code: 'START148', name: 'Starters 148', date: '2024-08-15', time: '18:00', duration: '2 Hrs', startDate: '2024-08-15', endDate: '2024-08-15', instructions: 'Rules and Regulations: This is an IOI-style contest...' },
+      { code: 'MEDIUM1', name: 'Medium 1', date: '2024-08-16', time: '19:00', duration: '2 Hrs', startDate: '2024-08-16', endDate: '2024-08-16', instructions: 'Rules and Regulations: This is an IOI-style contest...' }
     ];
     
-    const past = [
-      { code: 'START146', name: 'Starters 146', date: '2024-07-15', time: '09:00', duration: '2 Hrs' },
-      { code: 'MEDIUM3', name: 'Medium 3', date: '2024-07-16', time: '10:00', duration: '2 Hrs' }
-    ];
     
+
     setOngoingContests(ongoing);
     setPastContests(past);
   }, []);
@@ -47,7 +82,7 @@ const Contest = () => {
 
       setOngoingContests(updatedOngoing);
       setPastContests(updatedPast);
-    }, 1000); // Update every 10 seconds
+    }, 1000); 
 
     return () => clearInterval(intervalId);
   }, [ongoingContests, pastContests]);
@@ -71,7 +106,7 @@ const Contest = () => {
     const currentTime = new Date();
 
     if (currentTime >= contestDateTime) {
-      navigate(`./${contest.code}`);
+      navigate(`./${contest.code}`, { state: { past } });
     } else {
       const remainingTime = Math.abs(contestDateTime - currentTime);
       const hours = Math.floor(remainingTime / (1000 * 60 * 60));

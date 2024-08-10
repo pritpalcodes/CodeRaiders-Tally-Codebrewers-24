@@ -1,0 +1,39 @@
+.leaderboard-table, .question-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.leaderboard-table th, .leaderboard-table td, .question-table th, .question-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.leaderboard-table tr:nth-child(even), .question-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.leaderboard-table th, .question-table th {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.contest-details {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+.contest-details p {
+  margin: 5px 0;
+}
+
+.contest-details pre {
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

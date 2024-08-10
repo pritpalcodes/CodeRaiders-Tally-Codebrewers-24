@@ -61,7 +61,7 @@ const Description = () => {
         <div className='no-scrollbar bg-white/10 border border-white/30 w-1/2 rounded-2xl p-2 overflow-scroll overflow-x-hidden'>
             <div className="p-5">
               <h1 className='text-2xl poppins-semibold'>{problem.title}</h1>
-              <div className='easy'>{problem.difficulty}</div>
+              <div className={problem.difficulty}>{problem.difficulty}</div>
               <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Description:</h2>
               <div className="problem-statement" dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
               <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Examples:</h2>
@@ -74,22 +74,22 @@ const Description = () => {
                   </li>
                 ))}
               </ul>
-              <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Constraints</h2>
+              <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Constraints:</h2>
               <ul dangerouslySetInnerHTML={{ __html: problem.constraints }} />
-              <h2 className='text-white'>Starter Code</h2>
-              <pre><code>{problem.starterCode}</code></pre>
             </div>
         </div>
         
         <div className='w-1/2 flex flex-col gap-5'>
-          {/* Compiler */}
-          <div className='overflow-hidden bg-[#1e1e1e]  border border-white/30 w-full h-1/2 rounded-2xl p-5'>
-            <CodeEditorFrame problem={problem}/>
-          </div>
-          {/* Test Cases */}
-          <div className='bg-white/10 border border-white/30 w-full h-1/2 rounded-2xl p-5'>
-            <TabsRender problem={problem} color='#000'/>
-          </div>
+          
+            {/* Compiler */}
+            <div className=' bg-[#1e1e1e]  border border-white/30 w-full h-full rounded-2xl p-5'>
+              <CodeEditorFrame problem={problem}/>
+            </div>
+            
+            {/* Test Cases */}
+            {/* <div className='bg-white/10 border border-white/30 w-full h-1/3 rounded-2xl px-5'>
+              <TabsRender problem={problem} color='#000'/>
+            </div> */}
         </div>
       
       </div>

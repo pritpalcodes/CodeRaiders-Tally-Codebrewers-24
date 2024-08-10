@@ -18,7 +18,7 @@ const CodeInput = ({ testInput, setTestInput }) => {
 					setToggleInputBar(!toggleInputBar);
 				}}>
 				Input:{" "}
-				{toggleInputBar ? <IoIosArrowUp /> : <IoIosArrowDown />					}
+				{toggleInputBar ? <IoIosArrowDown /> : <IoIosArrowUp />}
 				
 			</button>
 			<textarea

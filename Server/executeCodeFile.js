@@ -15,16 +15,23 @@ const executeCpp = (filePath) => {
         const startTime = process.hrtime(); // Start time
         const startCpuUsage = process.cpuUsage(); // Start CPU time
 
-        exec(
+        const timeout = 10000;
+
+        const processExec = exec(
             `g++ "${filePath}" -o "${outputPath}" && cd "${outputDir}" && ${jobId}.out` + 
 			 "< input.txt", // Use full paths
+            { timeout },
             (error, stdout, stderr) => {
                 const endTime = process.hrtime(startTime); // End time
                 const endCpuUsage = process.cpuUsage(startCpuUsage); // End CPU time
                 const executionTime = (endTime[0] * 1e9 + endTime[1]) / 1e6; // Convert to milliseconds
 
                 if (error) {
-                    reject({ error, stderr });
+                    if (error.killed) {
+                        resolve("Process terminated after exceeding time limit.");
+                    } else {
+                        reject({ error, stderr });
+                    }
                 } else {
                     const cpuTime = (endCpuUsage.user + endCpuUsage.system) / 1e6; // CPU time in seconds
                     const memoryUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(3) + ' MB'; // Memory in MB
@@ -36,6 +43,10 @@ const executeCpp = (filePath) => {
                 }
             }
         );
+
+        setTimeout(() => {
+            processExec.kill();
+        }, timeout);
     });
 };
 
@@ -45,7 +56,9 @@ const executePython = (filePath, inputFilePath) => {
         const startTime = process.hrtime(); // Start time
         const startCpuUsage = process.cpuUsage(); // Start CPU time
 
-        exec(`python ${filePath} < ${inputFilePath}`, (error, stdout, stderr) => {
+        const timeout = 10000;
+
+        const processExec =  exec(`python ${filePath} < ${inputFilePath}`,{ timeout }, (error, stdout, stderr) => {
             const endTime = process.hrtime(startTime); // End time
             const endCpuUsage = process.cpuUsage(startCpuUsage); // End CPU time
             const executionTime = (endTime[0] * 1e9 + endTime[1]) / 1e6; // Convert to milliseconds
@@ -62,6 +75,11 @@ const executePython = (filePath, inputFilePath) => {
                 resolve(result);
             }
         });
+
+        setTimeout(() => {
+            processExec.kill();
+        }, timeout);
+
     });
 };
 
@@ -70,7 +88,9 @@ const executeJavascript = (filePath) => {
         const startTime = process.hrtime(); // Start time
         const startCpuUsage = process.cpuUsage(); // Start CPU time
 
-        exec(`node ${filePath}`, (error, stdout, stderr) => {
+        const timeout = 10000;
+
+        const processExec = exec(`node ${filePath}`, { timeout }, (error, stdout, stderr) => {
             const endTime = process.hrtime(startTime); // End time
             const endCpuUsage = process.cpuUsage(startCpuUsage); // End CPU time
             const executionTime = (endTime[0] * 1e9 + endTime[1]) / 1e6; // Convert to milliseconds
@@ -87,6 +107,21 @@ const executeJavascript = (filePath) => {
                 resolve(result);
             }
         });
+
+        processExec.on('error', (error) => {
+            reject(error);
+        });
+
+        processExec.on('close', (code, signal) => {
+            if (signal === 'SIGTERM') {
+                resolve('Process terminated');
+            }
+        });
+
+        setTimeout(() => {
+            processExec.kill();
+        }, timeout);
+
     });
 };
 

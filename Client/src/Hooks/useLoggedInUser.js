@@ -12,7 +12,7 @@ const useLoggedInUser = () => {
         fetch(`http://localhost:5000/loggedInUser?email=${email}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setLoggedInUser(data);
             })
     },[email, loggedInUser]);

@@ -1,24 +1,71 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import "./CodeEditorFrame.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import CodeEditor from "./CodeEditor";
 import CodeOutput from "./CodeOutput";
-import CodeInput from "./CodeInput";
+// import CodeInput from "./CodeInput";
 import Navbar from "./Navbar";
-import { cppBoiler } from "./boilerPlate";
+import TabsRender from "./Tabs";
+// import { cppBoiler } from "./boilerPlate";
 
 function CodeEditorFrame({ problem }) {
-	const [code, setCode] = useState(problem.starterCode);
+	const completeCode = 
+	
+`#include<bits/stdc++.h>
+using namespace std;
+
+` 
++ problem.starterCode +
+`
+
+int main() {
+	int t;
+	cin >> t;
+	while(t--) {
+		int n;
+		cin >> n;
+		vector<int> nums(n);
+		for(int i = 0 ; i < n ; i++){
+			cin >> nums[i];
+		}
+		int target;
+		cin >> target;
+		vector<int> ans = twoSum(nums, target);
+		for(auto i : ans) {
+			cout << i << " ";
+		}
+		
+	}
+		
+	return 0;
+}
+`;
+
+	const [code, setCode] = useState(completeCode);
 	const [output, setOutput] = useState("");
 	const [language, setLanguage] = useState({
 		label: "C++",
 		value: "cpp",
 	});
 	const [toggled, setToggled] = useState(true);
-	const [testInput, setTestInput] = useState("");
+	// console.log(problem.toInputData);
+	const [testInput, setTestInput] = useState(problem.toInputData);
 	const [theme, setTheme] = useState("vs-dark");
 	const [status, setStatus] = useState(null);
+
+	const [expectedOutput, setExpectedOutput] = useState(problem.expectedOutput)
+	const [actualOutput, setActualOutput] = useState("")
+
+	useEffect(() => {
+		console.log("expectedOutput" + expectedOutput); // This will log the current state value after the component has rendered
+		console.log("actualOutput" + actualOutput); // This will log the current state value after the component has rendered
+		if(expectedOutput==actualOutput) {
+			alert("correct");
+		}
+	}, [expectedOutput, actualOutput]);
+
 	const handleSubmit = async () => {
 		const payload = {
 			language: language.value,
@@ -29,11 +76,26 @@ function CodeEditorFrame({ problem }) {
 		try {
 			const { data } = await axios.post(url, payload);
 			setOutput(data.output);
-			// console.log(data.output);
+
+			let actualOutput = data.output.split("Execution")[0];
+			
+			setExpectedOutput(expectedOutput.trim());
+			setActualOutput(actualOutput.trim());
+			
+			console.log(data.output);
 			setStatus("Finished");
 		} catch ({ response }) {
 			if (response) {
-				const error = response.data.err.stderr;
+				let error = response.data.err.stderr;			
+				const errorIndex = error.indexOf("error");
+				const warningIndex = error.indexOf("warning");			
+				if (errorIndex !== -1 && warningIndex !== -1) {
+					error = errorIndex < warningIndex ? error.substring(errorIndex) : error.substring(warningIndex);
+				} else if (errorIndex !== -1) {
+					error = error.substring(errorIndex);
+				} else if (warningIndex !== -1) {
+					error = error.substring(warningIndex);
+				}
 				setOutput(error);
 			} else {
 				setOutput("Error connecting with the Server!");
@@ -41,14 +103,9 @@ function CodeEditorFrame({ problem }) {
 		}
 	};
 	return (
-		<div className="h-screen w-full flex flex-col gap-5">
-			{/* <div className="w-full flex flex-row gap-3">
-					<div className="w-5 h-5 rounded-full bg-red-500 flex justify-center items-center"></div>
-					<div className="w-5 h-5 rounded-full bg-amber-300 flex justify-center items-center"></div>
-					<div className="w-5 h-5 rounded-full bg-emerald-500 flex justify-center items-center"></div>
-			</div> */}
-			<div className="flex md:flex-row flex-col h-full w-full gap-5">
-				<div className="flex h-full flex-col md:w-2/3 w-full ">
+		<div className="h-screen w-full">
+			<div className="overflow-hidden flex flex-col h-full w-full gap-5">
+				<div className="overflow-hidden flex h-full flex-col w-full ">
 					<Navbar
 						setLanguage={setLanguage}
 						language={language}
@@ -57,6 +114,7 @@ function CodeEditorFrame({ problem }) {
 						theme={theme}
 						handleSubmit={handleSubmit}
 						setStatus={setStatus}
+						problem={completeCode}
 					/>
 
 					<CodeEditor
@@ -66,13 +124,9 @@ function CodeEditorFrame({ problem }) {
 						language={language}
 					/>
 				</div>
-				<div className="md:w-1/3 flex w-full flex-col gap-5 h-full">
+				<div className="flex flex-row w-full gap-5 h-full">
 					<CodeOutput output={output} toggled={toggled} status={status} />
-					<CodeInput
-						testInput={testInput}
-						setTestInput={setTestInput}
-						setToggled={setToggled}
-					/>
+					<TabsRender problem={problem} color='#000' output={output} />
 				</div>
 			</div>
 		</div>

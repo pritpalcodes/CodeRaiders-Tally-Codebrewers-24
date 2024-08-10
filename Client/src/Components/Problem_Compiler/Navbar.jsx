@@ -15,6 +15,7 @@ const Navbar = ({
 	theme,
 	handleSubmit,
 	setStatus,
+	completeCode
 }) => {
 	function handleThemeChange(th) {
 		const theme = th;
@@ -73,12 +74,12 @@ const Navbar = ({
 					placeholder={language.label}
 					options={languageOptions}
 					value={language.value}
-					className="w-1/3"
+					className="w-full"
 					onChange={(e) => {
 						setLanguage(e);
 						const boiler =
 							e.value === "cpp"
-								? cppBoiler
+								? completeCode
 								: e.value === "py"
 								? pyBoiler
 								: jsBoiler;
@@ -86,6 +87,8 @@ const Navbar = ({
 					}}
 					styles={customStyles}
 				/>
+
+				{/* change above for boilerplate for problems */}
 				
 			</div>
 			<button

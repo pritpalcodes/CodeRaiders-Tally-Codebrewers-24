@@ -1,35 +1,30 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faSquareCaretUp,
-	faSquareCaretDown,
-} from "@fortawesome/free-solid-svg-icons";
-const CodeInput = ({ testInput, setTestInput, setToggled }) => {
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+
+
+const CodeInput = ({ testInput, setTestInput }) => {
 	const [toggleInputBar, setToggleInputBar] = useState(true);
 
 	return (
 		<div
-			className={` sm:border flex flex-col justify-end w-1/2 md:w-full bg-gray-900 h-64 ${
+			className={` sm:border flex flex-col justify-center w-1/2 md:w-full border rounded-2xl h-64 ${
 				toggleInputBar ? "md:h-16" : "md:h-1/3"
 			}`}>
 			<button
-				className="flex ml-0 items-center bg-gray-600 pt-2 pr-2 rounded-md text-base justify-center w-16"
+				className="flex ml-0 items-center pt-2 text-xl rounded-md justify-center w-32"
 				onClick={() => {
-					setToggled(!toggleInputBar);
 					setToggleInputBar(!toggleInputBar);
 				}}>
-				stdin{" "}
-				<FontAwesomeIcon
-					icon={toggleInputBar ? faSquareCaretUp : faSquareCaretDown}
-					size="xs"
-					className="ml-1"
-				/>
+				Input:{" "}
+				{toggleInputBar ? <IoIosArrowUp /> : <IoIosArrowDown />					}
+				
 			</button>
 			<textarea
 				name=""
 				id=""
-				className={`p-2 outline-none border-none bg-gray-500 ${
+				className={`p-2 text-white bg-transparent ${
 					toggleInputBar ? "hidden" : ""
 				}`}
 				cols="30"

@@ -47,8 +47,8 @@ const TypeWriterEffect = () => {
   }, [charIndex, deleting, delay, phraseIndex]);
 
   return (
-    <h2 className="text-5xl text-[#FFFFFF]">
-      Your one-stop solution to ... <span className="text-[#00FF00]">{displayedText}</span>
+    <h2 className="text-[#FFFFFF]">
+      Your one-stop solution to ...<span className="p-2 text-[#00FF00]">{displayedText}</span>
     </h2>
   );
 };

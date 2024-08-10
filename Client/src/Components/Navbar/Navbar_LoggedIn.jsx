@@ -5,7 +5,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { Avatar, Divider, IconButton, Menu, MenuItem } from '@mui/material';
 import useLoggedInUser from "../../Hooks/useLoggedInUser";
-
+import logo_compilex from '../../assets/logo-compilex.png'
 
 const Navbar_LoggedIn = ({handleLogout, user}) => {
 
@@ -34,9 +34,11 @@ const Navbar_LoggedIn = ({handleLogout, user}) => {
     const result =  user?.email?.split('@')[0];
     
   return (
-    <div className="w-full bg-[#282828] text-white h-[7vh] px-16 flex flex-row justify-between align-center items-center">
+    <div className="w-full text-white h-[7vh] px-16 flex flex-row justify-between align-center items-center">
         
-        <div className="w-1/2">Product Logo</div>
+        <div className="w-1/2">
+            <img src={logo_compilex} className='w-[170px]'/>
+        </div>
         
         <div className='w-1/2 flex flex-row gap-5 justify-end align-center items-center'>
             {/* NavLinks */}

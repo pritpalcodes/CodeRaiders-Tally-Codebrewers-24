@@ -40,8 +40,13 @@ function CodeEditorFrame() {
 		}
 	};
 	return (
-		<div className="h-screen w-full">
-			<div className="flex md:flex-row flex-col h-full w-full">
+		<div className="h-screen w-full flex flex-col gap-5">
+			{/* <div className="w-full flex flex-row gap-3">
+					<div className="w-5 h-5 rounded-full bg-red-500 flex justify-center items-center"></div>
+					<div className="w-5 h-5 rounded-full bg-amber-300 flex justify-center items-center"></div>
+					<div className="w-5 h-5 rounded-full bg-emerald-500 flex justify-center items-center"></div>
+			</div> */}
+			<div className="flex md:flex-row flex-col h-full w-full gap-5">
 				<div className="flex h-full flex-col md:w-2/3 w-full ">
 					<Navbar
 						setLanguage={setLanguage}
@@ -60,7 +65,7 @@ function CodeEditorFrame() {
 						language={language}
 					/>
 				</div>
-				<div className="md:w-1/3 border-l-1 border-gray-200 flex w-full md:flex-col flex-row-reverse h-full">
+				<div className="md:w-1/3 flex w-full flex-col gap-5 h-full">
 					<CodeOutput output={output} toggled={toggled} status={status} />
 					<CodeInput
 						testInput={testInput}

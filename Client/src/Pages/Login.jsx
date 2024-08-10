@@ -51,19 +51,19 @@ const Login = () => {
     }
 
   return (
-    <div className='h-screen w-screen bg-[#0f0e0e] flex flex-col'>
+    <div className='h-screen w-screen bg-[#0f0e0e] flex flex-col justify-center items-center'>
 
         {/* BODY */}
-        <div className='h-[85vh] w-screen flex justify-around items-start mt-5'>
+        <div className='h-[85vh] w-screen flex justify-around items-start '>
             {/* RIGHT SIDE */}
             <div className='mr-[5vw] w-[32%]'>
                 <div className='flex flex-col p-[50px] item-center bg-[#1b1b1b] rounded-[30px]'>
                     <div className="justify-start items-inherit row-auto ">
-                        <h2 className='text-[#D9D9D9] text-[24px]' style={{fontFamily: "Gilroy"}}>cooking inside?</h2>
+                        <h2 className='text-[#D9D9D9] text-[24px] mb-3' style={{fontFamily: "Gilroy"}}>Sign In</h2>
                         <form onSubmit={handleSubmit} className='flex flex-col justify-between gap-5'>
                             <input required type="email" className="w-full p-3 rounded-[5px] bg-[#D9D9D9] placeholder:text-gray-500" placeholder='Email Address' onChange={(e) => setEmail(e.target.value)}/>
                             <input required type="password" className="w-full mt-0 p-3 rounded-[5px] bg-[#D9D9D9] placeholder:text-gray-500" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
-                            <button type='submit' className="w-full p-3 mb-[15px] rounded-[5px] bg-[#e6b92d]">Login</button>
+                            <button type='submit' className="w-full p-3 mb-[15px] rounded-[5px] bg-[#3f7bdf] text-white">Login</button>
                         </form>
                     </div>
                     {/* <hr /> */}
@@ -81,7 +81,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className='flex mt-5 '>
-                        <span className='text-[#D9D9D9]' style={{fontFamily: "Gilroy"}}>new warrior?</span>
+                        <span className='text-[#D9D9D9]' style={{fontFamily: "Gilroy"}}>new user?</span>
                         <Link to='/signup' className='' style={{ textDecoration:'none', color: 'skyblue', fontWeight: '600', marginLeft: '5px' }} > Create Account </Link>
                     </div>
                 </div> 

@@ -1,10 +1,15 @@
 import { GoSun } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import logo_compilex from '../../assets/logo-compilex.png'
 
 const Navbar_NotLoggedIn = () => {
   return (
-    <div className="w-full bg-[#282828] text-white h-[7vh] px-16 flex flex-row justify-between align-center items-center">
-        <div className="w-1/2">Product Logo</div>
+    <div className="w-full text-white h-[10vh] px-16 flex flex-row justify-between align-center items-center">
+        <div className="w-1/2">
+          <div className="w-1/2">
+              <img src={logo_compilex} className='w-[170px]'/>
+          </div>
+        </div>
         <div className="w-1/2 flex flex-row gap-5 justify-end align-center items-center">
             <div className="rounded-[50%] p-1 bg-white text-black text-xl border-white">
                 <GoSun />

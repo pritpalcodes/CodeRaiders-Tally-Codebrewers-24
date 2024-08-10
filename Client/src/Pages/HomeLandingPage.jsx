@@ -57,7 +57,7 @@ const HomeLandingPage = () => {
                     <CodeEditorFrame />
                 </div>
             </div>
-            <DebugFeature />
+            {/* <DebugFeature /> */}
             <Footer />
         </div>
     );

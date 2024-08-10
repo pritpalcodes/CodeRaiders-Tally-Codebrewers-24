@@ -28,11 +28,21 @@ function CodeEditorFrame() {
 		try {
 			const { data } = await axios.post(url, payload);
 			setOutput(data.output);
-			// console.log(data.output);
+			console.log(data.output);
 			setStatus("Finished");
 		} catch ({ response }) {
 			if (response) {
-				const error = response.data.err.stderr;
+				let error = response.data.err.stderr;			
+				const errorIndex = error.indexOf("error");
+				const warningIndex = error.indexOf("warning");			
+				if (errorIndex !== -1 && warningIndex !== -1) {
+					error = errorIndex < warningIndex ? error.substring(errorIndex) : error.substring(warningIndex);
+				} else if (errorIndex !== -1) {
+					error = error.substring(errorIndex);
+				} else if (warningIndex !== -1) {
+					error = error.substring(warningIndex);
+				}
+			
 				setOutput(error);
 			} else {
 				setOutput("Error connecting with the Server!");
@@ -40,7 +50,7 @@ function CodeEditorFrame() {
 		}
 	};
 	return (
-		<div className="h-screen w-full flex flex-col gap-5">
+		<div className="h-full w-full flex flex-col gap-5">
 			{/* <div className="w-full flex flex-row gap-3">
 					<div className="w-5 h-5 rounded-full bg-red-500 flex justify-center items-center"></div>
 					<div className="w-5 h-5 rounded-full bg-amber-300 flex justify-center items-center"></div>

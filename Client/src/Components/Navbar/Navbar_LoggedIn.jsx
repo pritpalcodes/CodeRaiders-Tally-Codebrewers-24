@@ -21,7 +21,9 @@ const Navbar_LoggedIn = ({handleLogout, user}) => {
     const openMenu = Boolean(anchorEl);  
     const [loggedInUser] = useLoggedInUser();
 
-    const userProfilePic = loggedInUser[0]?.profileImage ? loggedInUser[0]?.profileImage : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+    const userProfilePic = user?.photoURL ? user?.photoURL : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+
+    console.log(user?.photoURL)
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);

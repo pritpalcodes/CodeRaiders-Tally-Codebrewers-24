@@ -10,7 +10,7 @@ const TabsRender = ({ problem }) => {
 //   console.log(problem)
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
+    <div className="w-full p-4">
       {/* Tabs Header */}
       <div className="flex gap-2">
         <button
@@ -19,7 +19,7 @@ const TabsRender = ({ problem }) => {
           }`}
           onClick={() => handleTabClick(1)}
         >
-          Case 1
+          <strong>Case 1</strong>
         </button>
         <button
           className={`flex-1 py-2 text-center ${
@@ -27,7 +27,7 @@ const TabsRender = ({ problem }) => {
           }`}
           onClick={() => handleTabClick(2)}
         >
-          Case 2
+          <strong>Case 2</strong>
         </button>
         <button
           className={`flex-1 py-2 text-center ${
@@ -35,7 +35,7 @@ const TabsRender = ({ problem }) => {
           }`}
           onClick={() => handleTabClick(3)}
         >
-          Case 3
+          <strong>Case 3</strong>
         </button>
       </div>
 
@@ -43,25 +43,34 @@ const TabsRender = ({ problem }) => {
       <div className="mt-4">
         {
             activeTab === 1 && 
-                <div className="p-4 bg-gray-100 rounded-lg text-black">
-                    <h1>Input: { problem.examples[0].inputText }</h1>
-                    <h1>Expected Output: { problem.examples[0].outputText }</h1>
+                <div className="font-mono p-4 bg-gray-100 rounded-lg text-black">
+                    <h1><strong>Input:</strong> { problem.examples[0].inputText }</h1>
+                    <h1><strong>Expected Output: </strong> { problem.examples[0].outputText }</h1>
+                    {/* {
+                        isCorrect ? `Correct: ${output}` : `Wrong: ${output}`
+                    } */}
                 </div>
         }
 
         {
             activeTab === 2 && 
-                <div className="p-4 bg-gray-100 rounded-lg text-black">
+                <div className="font-mono p-4 bg-gray-100 rounded-lg text-black">
                     <h1>Input: { problem.examples[1].inputText }</h1>
                     <h1>Expected Output: { problem.examples[1].outputText }</h1>
+                    {/* {
+                        isCorrect ? `Correct: ${output}` : `Wrong: ${output}`
+                    } */}
                 </div>
         }
 
         {
             activeTab === 3 && 
-                <div className="p-4 bg-gray-100 rounded-lg text-black">
+                <div className="font-mono p-4 bg-gray-100 rounded-lg text-black">
                     <h1>Input: { problem.examples[2].inputText }</h1>
                     <h1>Expected Output: { problem.examples[2].outputText }</h1>
+                    {/* {
+                        isCorrect ? `Correct: ${output}` : `Wrong: ${output}`
+                    } */}
                 </div>
         }
       </div>

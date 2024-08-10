@@ -16,7 +16,9 @@ const Navbar_NotLoggedIn = () => {
             <div className="rounded-[50%] p-1 bg-white text-black text-xl border-white">
                 <GoSun />
             </div>
-            <div>Signup</div>
+            <Link to="/signup" className="px-5 py-2 text-white poppins-medium">
+              Signup
+            </Link>
             <Link to="/login" className="px-10 py-2 bg-white text-black rounded-md poppins-medium">
               Login
             </Link>

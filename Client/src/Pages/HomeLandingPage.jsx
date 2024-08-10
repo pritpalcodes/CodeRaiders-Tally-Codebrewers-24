@@ -42,7 +42,7 @@ const HomeLandingPage = () => {
                 <Navbar_NotLoggedIn />
             )}
             
-            <img src={abstract} style={{position: "fixed", top:"10%", left:"85%", width:"300px", zIndex:"1"}} className="brightness-50"/>
+            {/* <img src={abstract} style={{position: "absolute", top:"10%", left:"85%", width:"300px", zIndex:"1"}} className="brightness-50"/> */}
             <div className="w-full poppins-semibold text-white px-16 flex flex-col items-center gap-5">
                 <h1 className="text-[65px] mt-5 py-0">
                     Unleash the Coder Within!
@@ -53,7 +53,7 @@ const HomeLandingPage = () => {
                     <button onClick={competeClick} className="px-10 py-2 bg-white text-black rounded-md poppins-medium">Compete</button>
                 </div>
                 
-                <div className="w-[90%] p-5 rounded-3xl border border-white/30 bg-[#1e1e1e] mt-10">
+                <div className="w-[90%] p-5 rounded-3xl border border-white/30 bg-[#1e1e1e] my-10">
                     <CodeEditorFrame />
                 </div>
             </div>

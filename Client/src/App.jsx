@@ -1,6 +1,8 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+
 import HomeLandingPage from './Pages/HomeLandingPage'
 import Login from './Pages/Login'
+import Signup from './Pages/Signup'
 
 // import Login from './Pages/Login'
 // import ProtectedRoute from './Pages/ProtectedRoute'
@@ -21,6 +23,7 @@ function App() {
 
             <Route path='/' index element={<HomeLandingPage/>} /> 
             <Route path='/login' element={<Login/>} />
+            <Route path='/signup' element={<Signup/>} />
 
             <Route path='/practice' element={<ProtectedRoute><Practice/></ProtectedRoute>} />
             <Route path='/practice/:id' element={<Description />} />

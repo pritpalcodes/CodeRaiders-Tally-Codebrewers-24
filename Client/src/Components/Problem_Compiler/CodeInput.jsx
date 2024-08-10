@@ -1,15 +1,16 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
 
-const CodeInput = ({ testInput, setTestInput }) => {
+const CodeInput = ({ problem, testInput, setTestInput }) => {
 	const [toggleInputBar, setToggleInputBar] = useState(true);
 
 	return (
 		<div
-			className={` sm:border flex flex-col justify-center w-1/2 md:w-full border rounded-2xl h-64 ${
+			className={`z-20 sm:border flex flex-col justify-center w-1/2 md:w-full border rounded-2xl h-64 ${
 				toggleInputBar ? "md:h-16" : "md:h-1/3"
 			}`}>
 			<button
@@ -18,7 +19,7 @@ const CodeInput = ({ testInput, setTestInput }) => {
 					setToggleInputBar(!toggleInputBar);
 				}}>
 				Input:{" "}
-				{toggleInputBar ? <IoIosArrowUp /> : <IoIosArrowDown />					}
+				{ toggleInputBar ? <IoIosArrowDown /> : 	<IoIosArrowUp /> }
 				
 			</button>
 			<textarea
@@ -30,7 +31,7 @@ const CodeInput = ({ testInput, setTestInput }) => {
 				cols="30"
 				rows="15"
 				placeholder=""
-				value={testInput}
+				value={problem.toInputData}
 				onChange={(e) => setTestInput(e.target.value)}></textarea>
 		</div>
 	);

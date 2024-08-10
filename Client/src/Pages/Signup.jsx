@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
-import auth from '../../firebase.init'
+import auth from '../firebase.init'
 import GoogleButton from 'react-google-button'
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -67,13 +67,13 @@ const Signup = () => {
             <div className='mr-[5vw] w-[32%]'>
                 <div className='flex flex-col p-[50px] item-center bg-[#1b1b1b] rounded-[30px] mb-10'>
                     <div className="justify-start items-inherit row-auto ">
-                        <h2 className='text-[#D9D9D9] text-[24px]' style={{fontFamily: "Gilroy"}}>cooking inside?</h2>
+                        <h2 className='text-[#D9D9D9] text-[24px]' style={{fontFamily: "Gilroy"}}>Sign Up</h2>
                         <form onSubmit={handleSubmit} className='flex flex-col justify-between gap-5'>
                             <input type="text" className="w-full p-3 rounded-[5px] bg-[#D9D9D9] placeholder:text-gray-500" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
                             <input type="text" className="w-full p-3 rounded-[5px] bg-[#D9D9D9] placeholder:text-gray-500" placeholder='Enter Full Name' onChange={(e) => setName(e.target.value)}/>
                             <input required type="email" className="w-full p-3 rounded-[5px] bg-[#D9D9D9] placeholder:text-gray-500" placeholder='Email Address' onChange={(e) => setEmail(e.target.value)}/>
                             <input required type="password" className="w-full mt-0 p-3 rounded-[5px] bg-[#D9D9D9] placeholder:text-gray-500" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
-                            <button type='submit' className="w-full p-3 mb-[15px] rounded-[5px] bg-[#e6b92d]">Sign Up</button>
+                            <button type='submit' className="w-full p-3 mb-[15px] rounded-[5px] bg-[#4285F4] text-white">Sign Up</button>
                         </form>
                     </div>
                     {/* <hr /> */}

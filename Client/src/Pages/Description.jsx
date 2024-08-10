@@ -7,6 +7,9 @@ import Navbar_NotLoggedIn from '../Components/Navbar/Navbar_NotLoggedIn';
 import useLoggedInUser from '../Hooks/useLoggedInUser';
 import auth from '../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import './Description.css'
+import CodeEditorFrame from '../Components/Problem_Compiler/CodeEditorFrame';
+import TabsRender from '../Components/Problem_Compiler/Tabs';
 
 const Description = () => {
   const { id } = useParams();
@@ -52,9 +55,46 @@ const Description = () => {
           <Navbar_NotLoggedIn />
       )}
 
+      <div className='w-full h-[90vh] p-1 pb-5 text-white bg-[#181818] px-10 flex flex-row gap-5 justify-between'>
+        
+        {/* Problem Description */}
+        <div className='no-scrollbar bg-white/10 border border-white/30 w-1/2 rounded-2xl p-2 overflow-scroll overflow-x-hidden'>
+            <div className="p-5">
+              <h1 className='text-2xl poppins-semibold'>{problem.title}</h1>
+              <div className='easy'>{problem.difficulty}</div>
+              <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Description:</h2>
+              <div className="problem-statement" dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
+              <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Examples:</h2>
+              <ul className='font-mono ml-5'>
+                {problem.examples.map(ex => (
+                  <li key={ex.id} className='pb-5'>
+                    <p><strong>Input:</strong> {ex.inputText}</p>
+                    <p><strong>Output:</strong> {ex.outputText}</p>
+                    {ex.explanation && <p><strong>Explanation:</strong> {ex.explanation}</p>}
+                  </li>
+                ))}
+              </ul>
+              <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Constraints</h2>
+              <ul dangerouslySetInnerHTML={{ __html: problem.constraints }} />
+              <h2 className='text-white'>Starter Code</h2>
+              <pre><code>{problem.starterCode}</code></pre>
+            </div>
+        </div>
+        
+        <div className='w-1/2 flex flex-col gap-5'>
+          {/* Compiler */}
+          <div className='overflow-hidden bg-[#1e1e1e]  border border-white/30 w-full h-1/2 rounded-2xl p-5'>
+            <CodeEditorFrame problem={problem}/>
+          </div>
+          {/* Test Cases */}
+          <div className='bg-white/10 border border-white/30 w-full h-1/2 rounded-2xl p-5'>
+            <TabsRender problem={problem} color='#000'/>
+          </div>
+        </div>
       
+      </div>
 
-    <div className="mx-10 p-5">
+    {/* <div className="mx-10 p-5">
       <h1>{problem.title}</h1>
       <div className="problem-statement" dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
       <h2>Examples</h2>
@@ -71,7 +111,7 @@ const Description = () => {
       <ul dangerouslySetInnerHTML={{ __html: problem.constraints }} />
       <h2>Starter Code</h2>
       <pre><code>{problem.starterCode}</code></pre>
-    </div>
+    </div> */}
     </>
   );
 };

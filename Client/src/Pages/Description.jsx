@@ -54,7 +54,7 @@ const Description = () => {
 
       
 
-    {/* <div className="mx-10 p-5">
+    <div className="mx-10 p-5">
       <h1>{problem.title}</h1>
       <div className="problem-statement" dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
       <h2>Examples</h2>
@@ -71,7 +71,7 @@ const Description = () => {
       <ul dangerouslySetInnerHTML={{ __html: problem.constraints }} />
       <h2>Starter Code</h2>
       <pre><code>{problem.starterCode}</code></pre>
-    </div> */}
+    </div>
     </>
   );
 };

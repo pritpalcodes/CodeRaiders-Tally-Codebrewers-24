@@ -9,39 +9,12 @@ import CodeOutput from "./CodeOutput";
 import Navbar from "./Navbar";
 import TabsRender from "./Tabs";
 // import { cppBoiler } from "./boilerPlate";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function CodeEditorFrame({ problem }) {
-	const completeCode = 
-	
-`#include<bits/stdc++.h>
-using namespace std;
-
-` 
-+ problem.starterCode +
-`
-
-int main() {
-	int t;
-	cin >> t;
-	while(t--) {
-		int n;
-		cin >> n;
-		vector<int> nums(n);
-		for(int i = 0 ; i < n ; i++){
-			cin >> nums[i];
-		}
-		int target;
-		cin >> target;
-		vector<int> ans = twoSum(nums, target);
-		for(auto i : ans) {
-			cout << i << " ";
-		}
-		
-	}
-		
-	return 0;
-}
-`;
+	const completeCode = problem.starterCode;
 
 	const [code, setCode] = useState(completeCode);
 	const [output, setOutput] = useState("");
@@ -57,14 +30,22 @@ int main() {
 
 	const [expectedOutput, setExpectedOutput] = useState(problem.expectedOutput)
 	const [actualOutput, setActualOutput] = useState("")
+	const [comparisonTriggered, setComparisonTriggered] = useState(false); // New state
 
 	useEffect(() => {
-		console.log("expectedOutput" + expectedOutput); // This will log the current state value after the component has rendered
-		console.log("actualOutput" + actualOutput); // This will log the current state value after the component has rendered
-		if(expectedOutput==actualOutput) {
-			alert("correct");
+		console.log("expectedOutput" + expectedOutput); 
+		console.log("actualOutput" + actualOutput);
+		if (comparisonTriggered && expectedOutput && actualOutput) {
+			if (expectedOutput === actualOutput) {
+				toast.success('All test cases pass!');
+			} else {
+				toast.error('One or more test cases failed!');
+			}
+			setComparisonTriggered(false);
 		}
-	}, [expectedOutput, actualOutput]);
+	}, [expectedOutput, actualOutput, comparisonTriggered]);
+
+
 
 	const handleSubmit = async () => {
 		const payload = {
@@ -81,6 +62,8 @@ int main() {
 			
 			setExpectedOutput(expectedOutput.trim());
 			setActualOutput(actualOutput.trim());
+			setComparisonTriggered(true); 
+			
 			
 			console.log(data.output);
 			setStatus("Finished");
@@ -125,9 +108,23 @@ int main() {
 					/>
 				</div>
 				<div className="flex flex-row w-full gap-5 h-full">
-					<CodeOutput output={output} toggled={toggled} status={status} />
-					<TabsRender problem={problem} color='#000' output={output} />
+					{/* <CodeOutput output={output} toggled={toggled} status={status} /> */}
+					<TabsRender problem={problem} color='#000' output={output} status={status} />
 				</div>
+				<ToastContainer
+					position="top-center"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					transition: Bounce
+					theme="dark"
+				/>
+
 			</div>
 		</div>
 	);

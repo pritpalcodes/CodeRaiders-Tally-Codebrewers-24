@@ -58,6 +58,6 @@ module.exports = {
         handlerFunction: handlerTwoSum,
         starterCode: starterCodeTwoSum,
         order: 1,
-        starterFunctionName: "function twoSum("
+        starterFunctionName: "function twoSum"
     }
 };

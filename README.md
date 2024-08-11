@@ -57,7 +57,6 @@ client/
 - **Problems**: Contains JSON files that store coding problems and test cases.
 - **Outputs**: Stores the outputs generated after code execution.
 - **Scripts**: 
-  - `addProblems.js`: Script for adding new problems to the platform.
   - `executeCodeFile.js`: Executes the user-submitted code against provided test cases.
   - `generateCodeFile.js`: Generates the code file from the user's input.
 
@@ -85,15 +84,15 @@ server/
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/coderaiders.git
+    git clone https://github.com/pritpalcodes/CodeRaiders-Tally-Codebrewers-24
     ```
 
 2. Navigate to the project directory:
     ```sh
-    cd coderaiders
+    cd CodeRaiders-Tally-Codebrewers-24
     ```
 
-3. Install dependencies for both client and server:
+3. Install dependencies for both Client and Server:
     ```sh
     cd Client
     npm install
@@ -103,20 +102,20 @@ server/
 
 4. Set up your environment variables in the `Server/.env` file:
     ```env
-    MONGODB_URI=mongodb://localhost:27017/coderaiders
+    MONGODB_URI=<MONGODB_ATLAS_URI>
     ```
 
 5. Run the development server:
     ```sh
     cd Client
-    npm start
+    npm run dev
     cd ../Server
-    node index.js
+    npm start
     ```
 
 6. Open the application in your browser:
     ```
-    http://localhost:3000
+    http://localhost:5173
     ```
 
 ## 🎯 Usage
@@ -124,19 +123,3 @@ server/
 - **Coding Playground**: Start coding by navigating to the Playground section.
 - **Coding Arena**: Select a problem to solve or upload a new one.
 - **Coding Battleground**: Join a contest or create your own.
-
-## 🤝 Contributing
-
-We welcome contributions! Please fork this repository, create a new branch, make your changes, and submit a pull request.
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/my-feature`.
-3. Commit your changes: `git commit -m 'Add some feature'`.
-4. Push to the branch: `git push origin feature/my-feature`.
-5. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License.
-
-

@@ -128,6 +128,7 @@ const LeaderBoard = () => {
       <table className="leaderboard-table">
         <thead>
           <tr>
+            <th>Rank</th>
             <th>User</th>
             <th>Q1</th>
             <th>Q1 Submission Time</th>
@@ -139,6 +140,7 @@ const LeaderBoard = () => {
         <tbody>
           {leaderboardData.map((entry, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{entry.user}</td>
               <td>{entry.Q1}</td>
               <td>{entry.Q1Time}</td>

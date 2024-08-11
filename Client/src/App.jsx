@@ -14,6 +14,7 @@ import Practice from './Pages/Practice'
 import Contest from './Pages/Contest'
 import ContestDetails from './Pages/ContestDetails'
 import LeaderBoard from './Pages/LeaderBoard'
+import Profile from './Pages/Profile'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='/' index element={<HomeLandingPage/>} /> 
             <Route path='/login' element={<Login/>} />
             <Route path='/signup' element={<Signup/>} />
+            <Route path='/profile' element={<Profile/>} />
 
             <Route path='/practice' element={<ProtectedRoute><Practice/></ProtectedRoute>} />
             <Route path='/practice/:id' element={<Description />} />
@@ -33,8 +35,9 @@ function App() {
             {/* <Route path='/signup' element={<Signup/>} /> */}
             {/* <Route path='/page-loading' element={<PageLoading/>} /> */}
             <Route path='/contest/:code/leaderboard' element={<LeaderBoard />} />
-          </Routes>
+            <Route path='/contest/:code' element={<ContestDetails/>} />
           
+          </Routes>
         </BrowserRouter>
   )
 }

@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import MoonLoader from "react-spinners/ClipLoader";
+import { FaCheckCircle } from "react-icons/fa";
 
-const TabsRender = ({ problem }) => {
+const TabsRender = ({ problem, status }) => {
   const [activeTab, setActiveTab] = useState(1);
 
   const handleTabClick = (tabIndex) => {
@@ -14,28 +16,58 @@ const TabsRender = ({ problem }) => {
       {/* Tabs Header */}
       <div className="flex gap-2">
         <button
-          className={`flex-1 py-2 text-center ${
-            activeTab === 1 ? 'w-1/3 text-gray-700 bg-[#f2f3f4] rounded-lg' : 'text-white rounded-lg'
+          className={`flex flex-row gap-2 w-[30%] items-center p-2 justify-center text-center ${
+            activeTab === 1 ? ' text-gray-700 bg-[#f2f3f4] rounded-lg' : 'text-white rounded-lg'
           }`}
           onClick={() => handleTabClick(1)}
         >
           <strong>Case 1</strong>
+          {" "}
+          {status && (
+            <span
+              className={`flex flex-row items-center gap-2 p-1 font-bold text-base text-center rounded-full text-white ${
+                status === "Running" ? "bg-[#0088cc]" : "bg-[#5cb85c]"
+              } `}>
+              {status === "Running" ? <MoonLoader size={20}/> : <FaCheckCircle />}
+              {/* {status === "Running" ? "Executing" : "Finished"} */}
+            </span>
+          )}
         </button>
         <button
-          className={`flex-1 py-2 text-center ${
-            activeTab === 2 ? 'w-1/3 text-gray-700 bg-[#f2f3f4] rounded-lg' : 'text-white rounded-lg'
+          className={`flex flex-row gap-2 w-[30%] items-center p-2 justify-center text-center ${
+            activeTab === 2 ? ' text-gray-700 bg-[#f2f3f4] rounded-lg' : 'text-white rounded-lg'
           }`}
           onClick={() => handleTabClick(2)}
         >
           <strong>Case 2</strong>
+          {" "}
+          {status && (
+            <span
+              className={`flex flex-row items-center gap-2 p-1 font-bold text-base text-center rounded-full text-white ${
+                status === "Running" ? "bg-[#0088cc]" : "bg-[#5cb85c]"
+              } `}>
+              {status === "Running" ? <MoonLoader size={20}/> : <FaCheckCircle />}
+              {/* {status === "Running" ? "Executing" : "Finished"} */}
+            </span>
+          )}
         </button>
         <button
-          className={`flex-1 py-2 text-center ${
-            activeTab === 3 ? 'w-1/3 text-gray-700 bg-[#f2f3f4] rounded-lg' : 'text-white rounded-lg'        
+          className={`flex flex-row gap-2 w-[30%] items-center p-2 justify-center text-center ${
+            activeTab === 3 ? ' text-gray-700 bg-[#f2f3f4] rounded-lg' : 'text-white rounded-lg'
           }`}
           onClick={() => handleTabClick(3)}
         >
           <strong>Case 3</strong>
+          {" "}
+          {status && (
+            <span
+              className={`flex flex-row items-center gap-2 p-1 font-bold text-base text-center rounded-full text-white ${
+                status === "Running" ? "bg-[#0088cc]" : "bg-[#5cb85c]"
+              } `}>
+              {status === "Running" ? <MoonLoader size={20}/> : <FaCheckCircle />}
+              {/* {status === "Running" ? "Executing" : "Finished"} */}
+            </span>
+          )}
         </button>
       </div>
 

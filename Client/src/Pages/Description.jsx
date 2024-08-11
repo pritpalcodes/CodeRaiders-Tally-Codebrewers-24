@@ -10,6 +10,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import './Description.css'
 import CodeEditorFrame from '../Components/Problem_Compiler/CodeEditorFrame';
 import TabsRender from '../Components/Problem_Compiler/Tabs';
+import { FaCheckCircle } from "react-icons/fa";
 
 const Description = () => {
   const { id } = useParams();
@@ -33,7 +34,7 @@ const Description = () => {
     fetchProblemDetail();
   }, [id]);
 
-  const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [loggedInUser] = useLoggedInUser();
     const result = user?.email?.split('@')[0];
     
@@ -60,7 +61,13 @@ const Description = () => {
         {/* Problem Description */}
         <div className='no-scrollbar bg-white/10 border border-white/30 w-1/2 rounded-2xl p-2 overflow-scroll overflow-x-hidden'>
             <div className="p-5">
-              <h1 className='text-2xl poppins-semibold'>{problem.title}</h1>
+              <div className='flex flex-row justify-between items-center w-full'>
+                <h1 className='text-2xl poppins-semibold'>{problem.title}</h1>
+                <div className='flex flex-row items-center gap-2'>
+                  <FaCheckCircle />
+                  Accepted
+                </div>
+              </div>
               <div className={problem.difficulty}>{problem.difficulty}</div>
               <h2 className='text-white text-md normal-case poppins-bold text-left my-5'>Description:</h2>
               <div className="problem-statement" dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
@@ -79,6 +86,7 @@ const Description = () => {
             </div>
         </div>
         
+        {/* Code Editor */}
         <div className='w-1/2 flex flex-col gap-5'>
           
             {/* Compiler */}

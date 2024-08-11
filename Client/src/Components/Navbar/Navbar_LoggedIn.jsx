@@ -9,13 +9,13 @@ import logo_compilex from '../../assets/logo-compilex.png'
 
 const Navbar_LoggedIn = ({handleLogout, user}) => {
 
-    const linkClass = ( {isActive} ) => (
-        isActive 
-        ? 
-        'flex flex-row gap-2 items-center text-lg text-white text-[#4285F4] hover:text-[#4285F4] hover:text-white rounded-md px-4 py-2' 
-        : 
-        'flex flex-row gap-2 items-center text-lg text-[#D9D9D9] hover:text-white rounded-md px-4 py-2'
-    )
+    // const linkClass = ( {isActive} ) => (
+    //     isActive 
+    //     ? 
+    //     'flex flex-row gap-2 items-center text-lg text-white text-[#4285F4] hover:text-[#4285F4] hover:text-white rounded-md px-4 py-2' 
+    //     : 
+    //     'flex flex-row gap-2 items-center text-lg text-white hover:text-white rounded-md px-4 py-2'
+    // )
 
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);  
@@ -46,30 +46,25 @@ const Navbar_LoggedIn = ({handleLogout, user}) => {
         
         <div className='w-1/2 flex flex-row gap-5 justify-end align-center items-center'>
             {/* NavLinks */}
-            <div className='flex flex-row justify-around gap-5'>
-                <NavLink to='/profile' className={ linkClass }>
+            <div className='flex flex-row justify-around border rounded-2xl py-3 px-5'>
+                <NavLink to='/profile' className='flex flex-row gap-2 items-center'>
                     <BsPerson />
-                    <h2>Profile</h2>
+                    <h2 className='text-white'>Profile</h2>
                 </NavLink>
             </div>
 
             {/* Profile Icon */}
             <div className='mr-10'> 
-                <div className="flex flex-row justify-center items-center gap-0 pl-2 rounded-[20px] bg-[#0f0e0e]">
+                <div className="flex flex-row justify-center items-center gap-0 pl-2 rounded-[20px] bg-white/10">
+                    
                     <Avatar src={userProfilePic}></Avatar>
-                        {/* <div className='user_info'>
-                            <h4>
-                                {
-                                    loggedInUser[0]?.name ? loggedInUser[0]?.name : user && user[0]?.displayName
-                                }
-                            </h4>
-                            <h5>@{result}</h5>
-                        </div> */}
+
                     <IconButton size ='large' sx ={{ ml: 0}} aria-controls={openMenu ? "basic-menu" : undefined} aria-haspopup="true" aria-expanded={openMenu ? "true" : undefined} onClick={handleClick}>
                         <MdKeyboardArrowDown className='text-3xl text-[#D9D9D9]'/>
                     </IconButton>
+                    
                     <Menu id='basic-menu' anchorEl={anchorEl} open={openMenu} onClick={handleClose} onClose={handleClose}>
-                        <MenuItem className='Profile_info1'>
+                        <MenuItem className='Profile_info1 flex flex-row gap-2'>
                             <Avatar src={userProfilePic}></Avatar>
                             <div className='user_info subuser_info'>
                                 <h4>
@@ -81,7 +76,7 @@ const Navbar_LoggedIn = ({handleLogout, user}) => {
                             </div>
                         </MenuItem>
                         <Divider/>
-                        <MenuItem onClick={handleClose}> View Profile </MenuItem>
+                        {/* <MenuItem onClick={handleClose}> View Profile </MenuItem> */}
                         <MenuItem onClick={handleLogout}> Log Out @{result} </MenuItem>
                     </Menu>
                 </div>

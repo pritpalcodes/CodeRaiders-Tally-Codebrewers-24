@@ -45,11 +45,11 @@ const executeCpp = (filePath) => {
         );
 
         setTimeout(() => {
+            console.log('process ABOUT TO BE KILLED')
             processExec.kill();
         }, timeout);
     });
 };
-
 
 const executePython = (filePath, inputFilePath) => {
     return new Promise((resolve, reject) => {

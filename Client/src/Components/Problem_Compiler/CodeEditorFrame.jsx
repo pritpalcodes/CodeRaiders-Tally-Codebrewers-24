@@ -11,6 +11,7 @@ import TabsRender from "./Tabs";
 // import { cppBoiler } from "./boilerPlate";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import sanitizeHtml from 'sanitize-html';
 
 
 function CodeEditorFrame({ problem }) {
@@ -44,7 +45,6 @@ function CodeEditorFrame({ problem }) {
 			setComparisonTriggered(false);
 		}
 	}, [expectedOutput, actualOutput, comparisonTriggered]);
-
 
 
 	const handleSubmit = async () => {

@@ -10,7 +10,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
 
-**CodeRaiders** is a comprehensive online coding platform designed to empower developers of all skill levels. This platform offers a space to write and execute code, practice coding skills, and compete in coding contests.
+**CompileX** by CodeRaiders is a comprehensive online coding platform designed to empower developers of all skill levels. This platform offers a space to write and execute code, practice coding skills, and compete in coding contests.
 
 
 

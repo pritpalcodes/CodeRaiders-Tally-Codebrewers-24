@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation} from 'react-router-dom';
+import { useParams, useLocation, useNavigate} from 'react-router-dom';
 import './LeaderBoard.css';
+import questions from '../../../Server/problems/problems.json';
 
 const LeaderBoard = () => {
   const { code } = useParams();
@@ -10,7 +11,10 @@ const LeaderBoard = () => {
   
   const location = useLocation();
   const { past } = location.state || {}; 
+  const navigate = useNavigate();
   
+  
+
   useEffect(() => {
     // Simulate fetching contest details
     const contest = past.find(contest => contest.code === code);
@@ -40,42 +44,74 @@ const LeaderBoard = () => {
       setContestDetails(defaultContest);
     }
 
+    const selectRandomProblems = (questions) => {
+      const easyQuestions = questions.filter(q => q.difficulty === 'Easy');
+      const mediumQuestions = questions.filter(q => q.difficulty === 'Medium');
+
+      const randomEasy = easyQuestions[Math.floor(Math.random() * easyQuestions.length)];
+      const randomMedium = mediumQuestions[Math.floor(Math.random() * mediumQuestions.length)];
+
+      return [randomEasy, randomMedium];
+    };
+
+    // Check localStorage for previously saved questions
+    const storedQuestions = localStorage.getItem(`contestQuestions_${code}`);
+    let selectedQuestions;
+
+    if (storedQuestions) {
+      selectedQuestions = JSON.parse(storedQuestions);
+    } else {
+      selectedQuestions = selectRandomProblems(questions);
+      localStorage.setItem(`contestQuestions_${code}`, JSON.stringify(selectedQuestions));
+    }
+
+    const questionsWithDetails = selectedQuestions.map(question => ({
+      id: question.id,
+      title: question.title,
+      difficulty: question.difficulty,
+      score: question.difficulty === 'Easy' ? 4 : 7
+    }));
 
     // Simulate fetching leaderboard data
     const leaderboard = [
-      { user: 'User1', Q1: 'Correct', Q1Time: '10:05', Q2: 'Incorrect', Q2Time: '--' },
-      { user: 'User2', Q1: 'Correct', Q1Time: '10:10', Q2: 'Correct', Q2Time: '10:30' },
-      { user: 'User3', Q1: 'Incorrect', Q1Time: '--', Q2: 'Correct', Q2Time: '10:20' },
+      { user: 'User1', Q1: selectedQuestions[0].title, Q1Time: '10:05', Q2: selectedQuestions[1].title, Q2Time: '--', score: 0 },
+      { user: 'User2', Q1: selectedQuestions[0].title, Q1Time: '10:07', Q2: selectedQuestions[1].title, Q2Time: '10:30', score: 0 },
+      { user: 'User3', Q1: selectedQuestions[0].title, Q1Time: '--', Q2: selectedQuestions[1].title, Q2Time: '10:20', score: 0 },
+      { user: 'User4', Q1: selectedQuestions[0].title, Q1Time: '10:10', Q2: selectedQuestions[1].title, Q2Time: '10:27', score: 0 },
+      { user: 'User5', Q1: selectedQuestions[0].title, Q1Time: '10:10', Q2: selectedQuestions[1].title, Q2Time: '10:30', score: 0 },
     ];
 
-    // Simulate fetching question details with scores
-    const questions = [
-      { title: 'Question 1', difficulty: 'Easy', score: 4 },
-      { title: 'Question 2', difficulty: 'Medium', score: 7 },
-    ];
-
-    // Sort leaderboard based on correctness, scores, and submission times
-    leaderboard.sort((a, b) => {
-      const aScore = (a.Q1 === 'Correct' ? questions[0].score : 0) + (a.Q2 === 'Correct' ? questions[1].score : 0);
-      const bScore = (b.Q1 === 'Correct' ? questions[0].score : 0) + (b.Q2 === 'Correct' ? questions[1].score : 0);
-
-      if (aScore !== bScore) return bScore - aScore;
-
-      const aTotalTime = (a.Q1Time !== '--' ? new Date(`1970-01-01T${a.Q1Time}:00Z`).getTime() : 0)
-        + (a.Q2Time !== '--' ? new Date(`1970-01-01T${a.Q2Time}:00Z`).getTime() : 0);
-      const bTotalTime = (b.Q1Time !== '--' ? new Date(`1970-01-01T${b.Q1Time}:00Z`).getTime() : 0)
-        + (b.Q2Time !== '--' ? new Date(`1970-01-01T${b.Q2Time}:00Z`).getTime() : 0);
-
-      return aTotalTime - bTotalTime;
+    // Calculate final score
+    const updatedLeaderboard = leaderboard.map(entry => {
+      const Q1Details = selectedQuestions.find(q => q.title === entry.Q1);
+      const Q2Details = selectedQuestions.find(q => q.title === entry.Q2);
+  
+      const Q1Score = entry.Q1Time !== '--' ? (Q1Details ? (Q1Details.difficulty === 'Easy' ? 4 : 7) : 0) : 0;
+      const Q2Score = entry.Q2Time!== '--' ? (Q2Details ? (Q2Details.difficulty === 'Easy' ? 4 : 7) : 0) : 0;
+      
+      const totalScore = Q1Score + Q2Score;
+  
+      const Q1Time = entry.Q1Time !== '--' ? new Date(`1970-01-01T${entry.Q1Time}:00Z`).getTime() : Infinity;
+      const Q2Time = entry.Q2Time !== '--' ? new Date(`1970-01-01T${entry.Q2Time}:00Z`).getTime() : Infinity;
+  
+      const totalTime = Q1Time + Q2Time;
+  
+      return { ...entry, score: totalScore, totalTime };
     });
 
-    setLeaderboardData(leaderboard);
-    setQuestionDetails(questions);
+    // Sort leaderboard by score and time
+    const sortedLeaderboard = updatedLeaderboard.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.totalTime - b.totalTime;
+    });
+
+    setLeaderboardData(sortedLeaderboard);
+    setQuestionDetails(questionsWithDetails);
   }, [code]);
 
-  const handleQuestionClick = (questionTitle) => {
-    alert(`Navigating to the question: ${questionTitle}`);
-    // Here you can implement navigation to the specific question's page if needed
+  console.log(questionDetails);
+  const handleQuestionClick = (questionId) => {
+    navigate(`/practice/${questionId}`);
   };
 
   return (
@@ -92,21 +128,25 @@ const LeaderBoard = () => {
       <table className="leaderboard-table">
         <thead>
           <tr>
+            <th>Rank</th>
             <th>User</th>
             <th>Q1</th>
             <th>Q1 Submission Time</th>
             <th>Q2</th>
             <th>Q2 Submission Time</th>
+            <th>Score</th>
           </tr>
         </thead>
         <tbody>
           {leaderboardData.map((entry, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{entry.user}</td>
               <td>{entry.Q1}</td>
               <td>{entry.Q1Time}</td>
               <td>{entry.Q2}</td>
               <td>{entry.Q2Time}</td>
+              <td>{entry.score}</td>
             </tr>
           ))}
         </tbody>
@@ -123,7 +163,7 @@ const LeaderBoard = () => {
         </thead>
         <tbody>
           {questionDetails.map((question, index) => (
-            <tr key={index} onClick={() => handleQuestionClick(question.title)}>
+            <tr key={index} onClick={() => handleQuestionClick(question.id)}>
               <td>{question.title}</td>
               <td>{question.difficulty}</td>
               <td>{question.score}</td>

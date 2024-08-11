@@ -38,6 +38,40 @@ app.post('/users', async (req, res) => {
 	}	  
 });
   
+app.get('/getProblems', async (req, res) => {
+	try {
+	  const problems = await Problem.find(); // Fetch all documents in the collection
+	  res.json(problems);
+	} catch (error) {
+	  res.status(500).json({ message: 'Server Error' });
+	}
+});
+
+app.get('/checkSubmission/:userId', async (req, res) => {
+	const { userId } = req.params;
+  
+	try {
+	  // Fetch all problems
+	  const problems = await Problem.find({});
+  
+	  // Create an array to hold the status of each problem
+	  const statusArray = problems.map(problem => {
+		return {
+		  id: problem.id,
+		  title: problem.title,
+		  status: problem.submittedBy.includes(userId) ? 'Problem Solved' : 'Problem Unsolved'
+		};
+	  });
+  
+	  // Return the status of each problem
+	  res.json(statusArray);
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).json({ error: 'Internal Server Error' });
+	}
+});
+  
+  
   
 
 

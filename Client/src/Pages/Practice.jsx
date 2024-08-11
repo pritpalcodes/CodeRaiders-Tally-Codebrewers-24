@@ -8,7 +8,7 @@ import auth from '../firebase.init';
 import useLoggedInUser from '../Hooks/useLoggedInUser';
 import Navbar_LoggedIn from '../Components/Navbar/Navbar_LoggedIn';
 import Navbar_NotLoggedIn from '../Components/Navbar/Navbar_NotLoggedIn';
-
+import axios from 'axios'
 
 const Practice = () => {
 
@@ -22,22 +22,27 @@ const Practice = () => {
             console.error("Sign out error", error);
         });
     };
+
     const [problems, setProblems] = useState([]);
-
-  useEffect(() => {
-    const fetchProblems = async () => {
-      try {
-        const simplifiedProblems = questions.map(({ id, title, difficulty, category }) => ({
-          id, title, difficulty, category
-        }));
-        setProblems(simplifiedProblems);
-      } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-      }
-    };
-
-    fetchProblems();
-  }, []);
+    console.log("problems", problems )
+    
+    
+    useEffect(() => {
+      const fetchProblems = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/getProblems') 
+          const data = response.data
+          const simplifiedProblems = data.map(({ id, title, difficulty, category }) => ({
+            id, title, difficulty, category
+          }));
+          console.log("simplifiedProblems", simplifiedProblems )
+          setProblems(simplifiedProblems);
+        } catch (error) {
+          console.error('There was a problem with the fetch operation:', error);
+        }
+      };
+      fetchProblems();
+    }, []);
 
   return (
   <div className='flex flex-col bg-[#181818] h-screen'>  
@@ -56,6 +61,7 @@ const Practice = () => {
             <th>Title</th>
             <th>Difficulty</th>
             <th>Category</th>
+            <th>Submission Status</th>
           </tr>
         </thead>
         <tbody>

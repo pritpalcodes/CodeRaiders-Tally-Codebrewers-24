@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+// import mongoose from 'mongoose';
 
 const exampleSchema = new mongoose.Schema({
   id: {
@@ -66,8 +67,13 @@ const problemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  submittedBy: {
+    type: [String], // Array of user UUIDs
+    default: [],
+  },
 });
 
 const Problem = mongoose.model('Problem', problemSchema);
 
-export default Problem;
+module.exports = Problem;
+// export default mongoose.model('Problem', problemSchema);

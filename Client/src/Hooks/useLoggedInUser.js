@@ -36,9 +36,13 @@ const useLoggedInUser = () => {
                 photoURL: user?.photoURL,
             };
       
+            sessionStorage.setItem('userUUID', userData.uid);
+
             axios.post('http://localhost:5000/users', userData)
                 .then(response => console.log('User data saved:', response.data))
                 .catch(err => console.error('Error saving user data:', err));
+
+
         }
     }, [user]); // Only run when `user` changes
 
